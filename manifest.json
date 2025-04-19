@@ -1,9 +1,10 @@
 {
+    "_comment": "VERSION 1.0.1",
     "short_name": "Clock",
     "name": "SEGACD32XMODEL1's Vertical Clock",
     "icons": [
         {
-            "src": "/favicon.png",
+            "src": "./favicon.png",
             "sizes": "1080x1080",
             "type": "image/png"
         }
