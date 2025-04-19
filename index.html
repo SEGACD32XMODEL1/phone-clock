@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Clock</title>
+        <meta name="description" content="A clock good for your phone" />
+        <meta
+            name="viewport"
+            content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover"
+        />
+        <!--link rel="stylesheet" href=""-->
+        <link rel="manifest" href="manifest.json" />
+        <link rel="icon" type="image/x-icon" href="/favicon.png" />
+        <style>
+            * {
+                overflow: hidden;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            @font-face {
+                font-family: nova;
+                src: url(NovaMono-Regular.ttf);
+            }
+            #clock {
+                font-family: nova;
+                text-align: center;
+                font-size: 17rem;
+                margin: 0;
+                padding: 0;
+                line-height: 85%;
+                height: fit-content;
+            }
+            @media (display-mode: standalone) {
+                body {
+                    text-align: center;
+                    display: flex;
+                    align-items: center;
+                    /* justify-content: center; */
+                    flex-direction: column;
+                }
+                #clock {
+                    padding-top: 3rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <p id="clock">
+            <span id="hours"></span>
+            <br />
+            <span id="minutes"></span>
+            <br />
+            <span id="seconds"></span>
+        </p>
+
+        <script>
+            const clock = document.getElementById("clock");
+            const hours = document.getElementById("hours");
+            const minutes = document.getElementById("minutes");
+            const seconds = document.getElementById("seconds");
+
+            function setTime() {
+                now = new Date();
+                hours.textContent = formatTime(now.getHours());
+                minutes.textContent = formatTime(now.getMinutes());
+                seconds.textContent = formatTime(now.getSeconds());
+                console.log(clock.textContent);
+            }
+
+            setInterval(() => setTime(), 250);
+
+            function formatTime(number) {
+                return number < 10 ? "0" + number : number;
+                // return number < 10 ? `\u00a0${number}` : number;
+            }
+        </script>
+    </body>
+</html>
