@@ -1,4 +1,4 @@
-<!-- Version 1.0.1-->
+<!-- Version 1.1.0-->
 
 <!DOCTYPE html>
 <html>
@@ -28,11 +28,15 @@
             #clock {
                 font-family: nova;
                 text-align: center;
-                font-size: 17rem;
+                font-size: 12rem;
                 margin: 0;
                 padding: 0;
                 line-height: 85%;
                 height: fit-content;
+                width: 28rem;
+            }
+            .colon {
+                display: none;
             }
             @media (display-mode: standalone) {
                 body {
@@ -46,15 +50,42 @@
                     padding-top: 3rem;
                 }
             }
+
+            @media only screen and (orientation: landscape) and (max-device-width: 480px) {
+                #clock {
+                    width: 136rem;
+                    margin: 0;
+                    padding-top: 7rem;
+                    text-align: center;
+                    padding-left: 1rem;
+                }
+                br {
+                    display: none;
+                }
+                .colon {
+                    display: inline-block;
+                    line-height: 9rem;
+                    margin: 0;
+                    padding: 0;
+                }
+                span {
+                    display: inline-block;
+                    white-space: none;
+                    width: fit-content;
+                    margin: 0;
+                    padding: 0;
+                    font-size: 9rem;
+                }
+            }
         </style>
     </head>
     <body>
         <p id="clock">
-            <span id="hours"></span>
-            <br />
-            <span id="minutes"></span>
-            <br />
-            <span id="seconds"></span>
+            <span id="hours"></span><br /><span class="colon">:</span
+            ><span id="minutes"></span><span class="colon">:</span><br /><span
+                id="seconds"
+            ></span
+            ><br /><span id="amORpm"></span>
         </p>
 
         <script>
@@ -62,10 +93,11 @@
             const hours = document.getElementById("hours");
             const minutes = document.getElementById("minutes");
             const seconds = document.getElementById("seconds");
+            const amORpm = document.getElementById("amORpm");
 
             function setTime() {
                 now = new Date();
-                hours.textContent = formatTime(now.getHours());
+                hours.textContent = afternoon(now.getHours());
                 minutes.textContent = formatTime(now.getMinutes());
                 seconds.textContent = formatTime(now.getSeconds());
                 console.log(clock.textContent);
@@ -76,6 +108,16 @@
             function formatTime(number) {
                 return number < 10 ? "0" + number : number;
                 // return number < 10 ? `\u00a0${number}` : number;
+            }
+
+            function afternoon(number) {
+                if (number > 12) {
+                    amORpm.textContent = "PM";
+                    return formatTime(number - 12);
+                } else {
+                    amORpm.textContent = "AM";
+                    return formatTime(number);
+                }
             }
         </script>
     </body>
